@@ -6,7 +6,7 @@
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 18:14:10 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/10 23:20:16 by mgena            ###   ########.fr       */
+/*   Updated: 2019/09/11 18:00:52 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	size_t i;
-	char *res;
+	size_t	i;
+	char	*res;
 
 	res = s1;
 	i = 0;
