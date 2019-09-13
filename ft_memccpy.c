@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdlib.h"
+#include "libft.h"
 
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
@@ -21,7 +21,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	{
 		((unsigned char*)dest)[i] = ((unsigned char*)src)[i];
 		if ((unsigned char)c == ((unsigned char*)src)[i++])
-			return (&dest[i]);
+			return (&((unsigned char*)dest)[i]);
 	}
 	return (NULL);
 }
