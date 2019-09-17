@@ -1,65 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 10:30:13 by mgena             #+#    #+#             */
+/*   Updated: 2019/09/16 20:09:52 by mgena            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
 
-size_t ft_strnum(char const *s, char c)
+static size_t		ft_line(const char *s, char c, char *res)
 {
-	size_t ptrnum;
+	size_t i;
 
-	ptrnum = 1;
-	while (*s != '\0')
+	i = 0;
+	while (*s != c && *s != '\0')
 	{
+		res[i] = *s;
+		i++;
 		s++;
-		if (*s == c)
-			ptrnum++;
 	}
-	return (ptrnum);
+	res[i] = '\0';
+	return (i);
 }
 
-
-char	**ft_strsplit(char const *s, char c)
+static const char	*ft_jump(const char *s, char c)
 {
-	size_t ptrnum;
-	size_t i;
-	char **res;
-	char **tmp;
+	while (*s == c && *s != '\0')
+		s++;
+	return (s);
+}
+
+char				**ft_strsplit(char const *s, char c)
+{
+	size_t	k;
+	char	**res;
 
 	if (s == NULL)
 		return (NULL);
-	ptrnum = ft_strnum(s, c);
-	res = (char**)malloc(sizeof(char*) * ptrnum);
-	tmp = res;
+	s = ft_jump(s, c);
+	res = ft_memalloc(sizeof(char*) * ft_wordcount(s, c) + 1);
+	if (res == NULL)
+		return (NULL);
+	k = 0;
 	while (*s != '\0')
 	{
-		*res = malloc(ft_strclen(s, c) + 1);
-		i = 0;
-		while (*s != c && *s != '\0')
-		{
-			*res[i] = *s;
-			i++;	
-			s++;
-		}
-		*res[i] = '\0';
+		s = ft_jump(s, c);
+		res[k] = ft_strnew(ft_strclen(s, c));
+		if (res[k] == NULL)
+			return (NULL);
+		s += ft_line(s, c, res[k++]);
+		s = ft_jump(s, c);
 		if (*s == '\0')
-			return (tmp);
-		s++;
-		res++;
+			res[k] = NULL;
 	}
-}
-
-
-void	ft_print_result(char const *s)
-{
-	int		len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	write(1, s, len);
-}
-
-int		main(void)
-{
-	char **a = ft_strsplit("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
-	printf("%c\n", **a);
-
+	return (res);
 }

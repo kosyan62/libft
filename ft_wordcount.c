@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_wordcount.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/16 14:56:31 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/16 15:13:46 by mgena            ###   ########.fr       */
+/*   Created: 2019/09/16 20:07:50 by mgena             #+#    #+#             */
+/*   Updated: 2019/09/16 20:08:26 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalpha(int c)
+size_t	ft_wordcount(char const *s, char c)
 {
-	if ((c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A'))
-		return (1);
-	else
-		return (0);
+	size_t ptrnum;
+
+	ptrnum = 1;
+	while (*s != '\0')
+	{
+		if (*s != c)
+			ptrnum++;
+		while (*s != c && *s != '\0')
+			s++;
+		while (*s == c && *s != '\0')
+			s++;
+	}
+	return (ptrnum);
 }

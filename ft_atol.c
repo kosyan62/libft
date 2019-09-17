@@ -6,7 +6,7 @@
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 17:40:45 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/12 21:57:17 by mgena            ###   ########.fr       */
+/*   Updated: 2019/09/16 20:01:10 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ const char	*miss_space(const char *nptr)
 	return (nptr);
 }
 
-long		flag_ret(long res, const char *nptr, short flag)
+static long	flag_ret(long res, const char *nptr, short flag)
 {
 	if (flag == 0)
 	{

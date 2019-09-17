@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/16 14:56:31 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/16 15:13:46 by mgena            ###   ########.fr       */
+/*   Created: 2019/09/17 17:35:10 by mgena             #+#    #+#             */
+/*   Updated: 2019/09/17 18:18:53 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalpha(int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if ((c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A'))
-		return (1);
-	else
-		return (0);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		if (n == -2147483648)
+		{
+			ft_putnbr_fd((n / 10) * -1, fd);
+			ft_putchar_fd('8', fd);
+			return ;
+		}
+		n = -n;
+	}
+	if (n != 0)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
+	}
 }
