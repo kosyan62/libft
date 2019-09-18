@@ -6,13 +6,13 @@
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 22:43:49 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/17 22:53:58 by mgena            ###   ########.fr       */
+/*   Updated: 2019/09/18 12:39:17 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
 	if (lst == NULL || f == NULL)
 		return ;
