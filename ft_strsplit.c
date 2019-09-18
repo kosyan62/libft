@@ -6,7 +6,7 @@
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:30:13 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/16 20:09:52 by mgena            ###   ########.fr       */
+/*   Updated: 2019/09/18 14:10:20 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char				**ft_strsplit(char const *s, char c)
 		s = ft_jump(s, c);
 		res[k] = ft_strnew(ft_strclen(s, c));
 		if (res[k] == NULL)
+		{
+			ft_abortalloc(res, k);
 			return (NULL);
+		}
 		s += ft_line(s, c, res[k++]);
 		s = ft_jump(s, c);
 		if (*s == '\0')
