@@ -6,25 +6,25 @@
 /*   By: pkingsbl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 20:19:26 by pkingsbl          #+#    #+#             */
-/*   Updated: 2019/12/22 20:41:49 by pkingsbl         ###   ########.fr       */
+/*   Updated: 2020/07/22 15:46:22 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
+#include <stdio.h>
 char	*ft_for_string(va_list ap, t_specif spec)
 {
-	int		i;
 	char	*tmp;
 
-	i = -1;
-	tmp = ft_strdup(va_arg(ap, char*));
+	tmp = va_arg(ap, char*);
 	if (tmp == NULL)
 	{
 		free(tmp);
 		tmp = ft_strdup("(null)");
 		spec.len = 6;
 	}
+	else
+		tmp = ft_strdup(tmp);
 	if (spec.precision > -1 && spec.precision < (int)ft_strlen(tmp))
 		tmp[spec.precision] = '\0';
 	if (spec.wide != 0 && (spec.wide > (int)ft_strlen(tmp)))

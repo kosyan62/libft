@@ -6,14 +6,13 @@
 /*   By: pkingsbl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:31:53 by pkingsbl          #+#    #+#             */
-/*   Updated: 2020/03/06 16:20:00 by mgena            ###   ########.fr       */
+/*   Updated: 2020/07/22 14:57:41 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-# include <stdarg.h>
 # include "libft.h"
 
 # define NONDEC spec.type == 'x' || spec.type == 'X' || spec. type == 'o'
@@ -73,9 +72,11 @@ const char		*search_wide(const char *str, t_specif *spec, va_list ap);
 const char		*search_precision(const char *str, t_specif *spec, va_list ap);
 const char		*search_size(const char *str, t_specif *spec);
 const char		*search_type(const char *str, t_specif *spec);
+const char		*ft_search_spec(const char *format, t_specif *spec, va_list ap);
+int				ft_solve_type(va_list ap, int fd, t_specif spec);
 void			str_wide(char **str, t_specif spec);
 void			str_flags(char **str, char *s1);
-void			set_colour(const char *str);
-int				print_not_percent(const char *str, int *i);
+void			set_colour(const char *str, int fd);
+int				print_not_percent(const char *str, int *i, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pkingsbl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 17:49:07 by pkingsbl          #+#    #+#             */
-/*   Updated: 2020/01/31 17:24:12 by mgena            ###   ########.fr       */
+/*   Updated: 2020/07/22 15:00:55 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char		*ft_type_to_str(va_list ap, t_specif spec)
 	return (res);
 }
 
-int			ft_solve_type(va_list ap, t_specif spec)
+int			ft_solve_type(va_list ap, int fd, t_specif spec)
 {
 	char	*str;
 	int		i;
@@ -60,7 +60,7 @@ int			ft_solve_type(va_list ap, t_specif spec)
 		str = ft_for_percent(spec);
 	else if (spec.type == 'f')
 		str = ft_for_ld(ap, spec);
-	ft_putstr(str);
+	ft_putstr_fd(str, fd);
 	i = ft_strlen(str);
 	ft_strdel(&str);
 	return (i);
@@ -104,46 +104,8 @@ void		ft_spec_new(t_specif *spec)
 	spec->type = '\0';
 	spec->res = NULL;
 }
-int print_not_percent(const char *str, int *i)
-{
-    int len;
 
-    len = 0;
-    if (*str != '{')
-    {
-        write(1, str, 1);
-        *i = *i + 1;
-        return (1);
-    }
-    else
-    {
-        if (ft_strncmp(str, "{red}", 5) == 0)
-            ft_putstr(RED);
-        else if (!ft_strncmp(str, "{green}", 7))
-            ft_putstr(GRN);
-        else if (!ft_strncmp(str, "{yellow}", 8))
-            ft_putstr(YEL);
-        else if (!ft_strncmp(str, "{blue}", 6))
-            ft_putstr(BLU);
-        else if (!ft_strncmp(str, "{magnetic}", 10))
-            ft_putstr(MAG);
-        else if (!ft_strncmp(str, "{cyan}", 6))
-            ft_putstr(CYN);
-        else if (!ft_strncmp(str, "{white}", 7))
-            ft_putstr(WHT);
-        else if (!ft_strncmp(str, "{eoc}", 5))
-            ft_putstr(RESET);
-        else exit(0);
-        while (*str !=  '}')
-        {
-            str++;
-            len++;
-        }
-        return (len + 1);
-    }
-}
-
-int			ft_printf(const char *format, ...)
+int			ft_fdprintf(int fd, const char *format, ...)
 {
 	int			i;
 	va_list		ap;
@@ -156,15 +118,13 @@ int			ft_printf(const char *format, ...)
 	while (*format != '\0')
 	{
 		if (*format != '%')
-		{
-		    format += print_not_percent(format, &i);
-		}
+			format += print_not_percent(format, &i, fd);
 		if (*format == '%')
 		{
 			format++;
 			if ((format = ft_search_spec(format, &spec, ap)) == NULL)
 				return (0);
-			i += ft_solve_type(ap, spec);
+			i += ft_solve_type(ap, fd, spec);
 		}
 	}
 	va_end(ap);

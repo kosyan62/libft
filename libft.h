@@ -6,7 +6,7 @@
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:39:26 by mgena             #+#    #+#             */
-/*   Updated: 2020/03/13 18:09:31 by mgena            ###   ########.fr       */
+/*   Updated: 2020/07/22 11:49:49 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LIBFT_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 # define HASH_WEIGHT 12
 
@@ -91,7 +92,7 @@ char					*ft_strtrim(char const *s);
 size_t					ft_strclen(const char *s, char c);
 char					**ft_strsplit(char const *s, char c);
 size_t					ft_wordcount(char const *s, char c);
-void					ft_abortalloc(char **res);
+void					ft_abortalloc(char **res, size_t k);
 int						ft_countdigits(int n);
 char					*ft_itoa(int n);
 void					ft_putchar_fd(char c, int fd);
@@ -106,6 +107,7 @@ void					ft_lstaddend(t_list **alst, t_list *new);
 void					ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list					*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int						ft_printf(const char *format, ...);
+int						ft_fdprintf(int fd, const char *format, ...);
 char					*ft_realloc_double(char *str);
 _Bool					ft_isspace(int ch);
 int						get_next_line(const int fd, char **line);
