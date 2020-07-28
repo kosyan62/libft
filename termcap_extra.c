@@ -6,7 +6,7 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 14:48:09 by mgena             #+#    #+#             */
-/*   Updated: 2020/07/24 16:27:34 by mgena            ###   ########.fr       */
+/*   Updated: 2020/07/28 14:52:36 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	tinit(t_outputs *out)
 		out->NORM = tgetstr("me", &out->p);
 		out->VI = tgetstr("vi", &out->p);
 		out->VE = tgetstr("ve", &out->p);
+		out->HO = tgetstr("ho", &out->p);
 	}
 
 	else
