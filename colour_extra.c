@@ -28,6 +28,8 @@ void		set_colour(const char *str, int fd)
 		ft_putstr_fd(CYN, fd);
 	else if (!ft_strncmp(str, "{white}", 7))
 		ft_putstr_fd(WHT, fd);
+	else if (!ft_strncmp(str, "{brown}", 5))
+		ft_putstr_fd(BWN, fd);
 	else if (!ft_strncmp(str, "{eoc}", 5))
 		ft_putstr_fd(RESET, fd);
 	else

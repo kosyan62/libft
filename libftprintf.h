@@ -23,6 +23,7 @@
 # define MAG   "\x1B[35m"
 # define CYN   "\x1B[36m"
 # define WHT   "\x1B[37m"
+# define BWN   "\x1B[37m"
 # define RESET "\x1B[0m"
 
 typedef union	u_ptr
