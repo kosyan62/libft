@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
+
 char	*ft_for_string(va_list ap, t_specif spec)
 {
 	char	*tmp;
