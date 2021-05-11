@@ -122,5 +122,6 @@ void					ht_insert(t_hash_table *table, char *key, char *value);
 char					*ht_search(t_hash_table *table, char *key);
 void					ht_del_elem(t_hash_table *table, char *key);
 void					ht_print_whole(t_hash_table *table);
+void					ft_bubble_sort(void **array, size_t len, int(*func)(void*, void*));
 
 #endif
