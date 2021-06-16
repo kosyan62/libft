@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-char		*ft_type_to_str(va_list ap, t_specif spec)
+char	*ft_type_to_str(va_list ap, t_specif spec)
 {
 	__int128_t	arg;
 	char		*res;
@@ -20,12 +20,14 @@ char		*ft_type_to_str(va_list ap, t_specif spec)
 	if (spec.type == 'u' || NONDEC)
 	{
 		arg = va_arg(ap, unsigned long long);
-		arg = (spec.size[0] != 'l') ? (unsigned)arg : arg;
+		if (spec.size[0] != 'l')
+			arg = (unsigned)arg;
 	}
 	else
 	{
 		arg = va_arg(ap, long long);
-		arg = (spec.size[0] != 'l') ? (int)arg : arg;
+		if (spec.size[0] != 'l')
+			arg = (int)arg;
 	}
 	if (spec.type == 'x')
 		res = ft_for_haxedecimal(arg, spec);

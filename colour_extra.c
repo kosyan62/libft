@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void		set_colour(const char *str, int fd)
+void	set_colour(const char *str, int fd)
 {
 	if (ft_strncmp(str, "{red}", 5) == 0)
 		ft_putstr_fd(RED, fd);
@@ -36,9 +36,9 @@ void		set_colour(const char *str, int fd)
 		exit(0);
 }
 
-int			print_not_percent(const char *str, int *i, int fd)
+int	print_not_percent(const char *str, int *i, int fd)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (*str != '{')

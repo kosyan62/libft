@@ -37,7 +37,15 @@ static long	flag_ret(long res, const char *nptr, short flag)
 	}
 }
 
-long		ft_atol(const char *nptr)
+static long	return_signed(long num, short flag)
+{
+	if (!flag)
+		return (-num);
+	else
+		return (num);
+}
+
+long	ft_atol(const char *nptr)
 {
 	short	flag;
 	long	res;
@@ -62,6 +70,5 @@ long		ft_atol(const char *nptr)
 		res = res * 10 + (*nptr - '0');
 		nptr++;
 	}
-	res = (flag == 0) ? -res : res;
-	return (res);
+	return (return_signed(res, flag));
 }
