@@ -14,6 +14,13 @@
 
 int		ft_strcmp(const char *s1, const char *s2)
 {
+
+	if (!s1 && !s2)
+		return 0;
+	else if (!s1)
+		return -1;
+	else if (!s2)
+		return 1;
 	while ((unsigned char)*s1 == (unsigned char)*s2 && *s1 != '\0'\
 			&& *s2 != '\0')
 	{
