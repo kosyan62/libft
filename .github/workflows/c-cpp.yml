@@ -22,7 +22,7 @@ jobs:
     - name: Install and build libft-unit-test
       run: | 
         git clone https://github.com/alelievr/libft-unit-test.git libft-unit-test && \
-        make libft-unit-test
+        make -C libft-unit-test
     - name: Run Tests
       run: libft-unit-test/run_test
     - name: Upload test results
