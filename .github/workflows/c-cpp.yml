@@ -26,7 +26,13 @@ jobs:
       run: make
 
     - name: clone test repo
-      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i 's|^\(LIBFTDIR[ \t]*=[ \t]*\)\.\./libft|${PWD}|' /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
+      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i "s|^\(LIBFTDIR[ \t]*=[ \t]*\)\.\./libft|\1$(pwd)|" /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
 
     - name: run tests
       run: cd /tmp/libft-unit-test && make && ./run_test
+
+    - name: upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+          name: /tmp/libft-unit-test/results.log

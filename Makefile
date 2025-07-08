@@ -57,6 +57,8 @@ $(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
 # clean, fclean, and rebuild targets
 re: fclean all
 
+so: $(TARGET_SHARED)
+
 clean:
 	rm -rvf $(BUILD_DIR)
 
