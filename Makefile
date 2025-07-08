@@ -10,38 +10,52 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC=ft_itoa_base.c colour_extra.c ft_fdprintf.c ft_printf.c ldbl_extract.c rounding.c type_i_d.c ft_for_p.c ft_new.c ldbl_copy.c long_math.c percent.c type_c.c type_s.c ft_abortalloc.c ft_atoi.c ft_atol.c ft_bzero.c ft_countdigits.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c ft_memmove.c ft_memset.c ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c ft_strclen.c ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c ft_striter.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c ft_wordcount.c ft_qsort.c ft_swap_long.c
+NAME = libft
+TARGET_STATIC = $(NAME).a
+TARGET_SHARED = $(NAME).so
 
-OBJ_DIR = ./obj
+BUILD_DIR = build
+BUILD_STATIC = $(BUILD_DIR)/static
+BUILD_SHARED = $(BUILD_DIR)/shared
 
-OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
-NAME = libft.a
+SRC_DIR = src
+INC_DIR = includes
 
-INC = -I includes
+SRCS := $(shell find $(SRC_DIR) -name "*.c")
+OBJS_STATIC := $(patsubst $(SRC_DIR)/%.c,$(BUILD_STATIC)/%.o,$(SRCS))
+OBJS_SHARED := $(patsubst $(SRC_DIR)/%.c,$(BUILD_SHARED)/%.o,$(SRCS))
 
 .PHONY: all clean fclean re
 
-all: $(NAME)
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+all: $(TARGET_STATIC) $(TARGET_SHARED)
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+# build target
+$(TARGET_STATIC): $(OBJS_STATIC)
+	ar rcs $(TARGET_STATIC) $(OBJS_STATIC)
 
-$(OBJ_DIR)/%.o: %.c $(HEAD)
-	gcc $(INC) -Wall -Wextra -Werror -c $< -o $@
+$(TARGET_SHARED): $(OBJS_SHARED)
+	$(CC) -shared -o $(TARGET_SHARED) $(OBJS_SHARED)
+
+## compile source files
+$(BUILD_STATIC)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(BUILD_STATIC)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+
+$(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(BUILD_SHARED)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -nostartfiles -fPIC -c $< -o $@
+
+re: fclean all
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(BUILD_DIR)
 	rm -f *~
+
 
 fclean: clean
 	rm -f $(NAME)
 
-so:
-	gcc $(INC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
-	gcc  -nostartfiles -shared -o libft.so $(OBJ)
-
-re: fclean all
