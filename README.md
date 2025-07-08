@@ -1,6 +1,6 @@
-![42](https://img.shields.io/badge/-Project-black?logo=42&logoColor=white)
-[![C](https://img.shields.io/badge/language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
-[![Test](https://github.com/kosyan62/libft/actions/workflows/c-cpp.yml/badge.svg)]()
+[![42](https://img.shields.io/badge/-Project-black?logo=42&logoColor=white)](https://42.fr/)
+[![Test](https://github.com/kosyan62/libft/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/kosyan62/libft/actions/workflows/c-cpp.yml)
+![C](https://img.shields.io/badge/Language-%2300599C.svg?logo=c&logoColor=white)
 # Libft - C Standard Library Reimplementation
 
 
