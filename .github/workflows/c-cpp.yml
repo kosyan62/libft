@@ -38,4 +38,5 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-          name: /tmp/libft-unit-test/results.log
+          name: results
+          path: /tmp/libft-unit-test/results.log
