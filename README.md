@@ -11,7 +11,7 @@ Libft is a foundational project developed as part of the 42 School curriculum. I
 - Language: C
 - Goal: Implement a static C library (`libft.a`) containing re-implemented standard C functions, along with additional utility and linked list functions.
 - Purpose: Gain a deep understanding of memory management, string manipulation, and basic data structures in C.
-- Details: 
+- [Original task](static/libft.en.pdf)
 
 ## Features
 
