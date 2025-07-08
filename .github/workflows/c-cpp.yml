@@ -24,7 +24,7 @@ jobs:
         git clone https://github.com/alelievr/libft-unit-test.git libft-unit-test && \
         make -C libft-unit-test
     - name: Run Tests
-      run: (cd libft-unit-test && ./run_test)
+      run: bash -c "cd libft-unit-test && ./run_test"
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
