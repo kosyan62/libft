@@ -26,7 +26,7 @@ jobs:
       run: make
 
     - name: clone test repo
-      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i 's|^\(LIBFTDIR[ \t]*=[ \t]*\)\${PWD}' /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
+      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i 's|^\(LIBFTDIR[ \t]*=[ \t]*\)\${PWD}|' /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
 
     - name: run tests
       run: make && ./run_test
