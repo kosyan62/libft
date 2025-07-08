@@ -1,4 +1,8 @@
-# Libft
+![42](https://img.shields.io/badge/-Project-black?logo=42&logoColor=white)
+[![C](https://img.shields.io/badge/language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![Test](https://github.com/kosyan62/libft/actions/workflows/c-cpp.yml/badge.svg)]()
+# Libft - C Standard Library Reimplementation
+
 
 Libft is a foundational project developed as part of the 42 School curriculum. Its objective is to recreate essential C standard library functions from scratch while following strict coding standards. This library provides a reusable collection of C functions that are designed to be used in future projects.
 
