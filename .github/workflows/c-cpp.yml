@@ -29,7 +29,7 @@ jobs:
       run: sudo apt-get install -y gcc libbsd-dev libncurses-dev
 
     - name: clone test repo
-      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i "s|^\(LIBFTDIR[ \t]*=[ \t]*\)\.\./libft|\1$(pwd)|" /tmp/libft-unit-test/Makefile && sed -i "s|^\(CC[ \t]*=[ \t]*\)clang|\1gcc|" /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
+      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i "s|^\(LIBFTDIR[ \t]*=[ \t]*\)\.\./libft|\1$(pwd)|" /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
 
     - name: run tests
       run: cd /tmp/libft-unit-test && make && ./run_test
