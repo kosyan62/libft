@@ -31,16 +31,21 @@ OBJS_SHARED := $(patsubst $(SRC_DIR)/%.c,$(BUILD_SHARED)/%.o,$(SRCS))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(TARGET_STATIC) $(TARGET_SHARED)
+all: setup $(TARGET_STATIC) $(TARGET_SHARED)
 
-# build target
+# create build directories if they do not exist
+setup:
+	@mkdir -p $(BUILD_STATIC)
+	@mkdir -p $(BUILD_SHARED)
+
+# build static and shared libraries
 $(TARGET_STATIC): $(OBJS_STATIC)
 	ar rcs $(TARGET_STATIC) $(OBJS_STATIC)
 
 $(TARGET_SHARED): $(OBJS_SHARED)
 	$(CC) -shared -o $(TARGET_SHARED) $(OBJS_SHARED)
 
-## compile source files
+# compile source files
 $(BUILD_STATIC)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD_STATIC)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
@@ -49,13 +54,12 @@ $(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD_SHARED)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -nostartfiles -fPIC -c $< -o $@
 
+# clean, fclean, and rebuild targets
 re: fclean all
 
 clean:
-	rm -rf $(BUILD_DIR)
-	rm -f *~
-
+	rm -rvf $(BUILD_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rvf $(TARGET_STATIC) $(TARGET_SHARED)
 
