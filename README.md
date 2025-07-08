@@ -1,62 +1,91 @@
-# Libft — Standard C Library Implementation
+# Libft
 
-Libft is a personal C library developed as part of the **42 School** curriculum. The purpose of this project is to recreate a set of commonly used C standard library functions from scratch, with strict constraints and coding standards.
-
-This library serves as a foundational toolkit for future C projects, focusing on memory manipulation, string operations, linked list utilities, and basic input/output functions.
-
----
+Libft is a foundational project developed as part of the 42 School curriculum. Its objective is to recreate essential C standard library functions from scratch while following strict coding standards. This library provides a reusable collection of C functions that are designed to be used in future projects.
 
 ## Project Overview
 
-* **Language:** C
-* **Main Focus:** Low-level memory operations, string manipulation, linked lists, custom utility functions
-* **Objective:** Build a reusable static library (`libft.a`) containing essential C functions for use in future projects.
-
----
+- Language: C
+- Goal: Implement a static C library (`libft.a`) containing re-implemented standard C functions, along with additional utility and linked list functions.
+- Purpose: Gain a deep understanding of memory management, string manipulation, and basic data structures in C.
+- Details: 
 
 ## Features
 
-### Standard C Library Reimplementations
+### Standard C Library Reimplementations (Prefixed with `ft_`)
 
-Re-coded versions of standard C functions (with the `ft_` prefix):
+#### Memory Functions
+- `ft_memset`
+- `ft_bzero`
+- `ft_memcpy`
+- `ft_memccpy`
+- `ft_memmove`
+- `ft_memchr`
+- `ft_memcmp`
 
-#### Memory Functions:
+#### String Functions
+- `ft_strlen`
+- `ft_strdup`
+- `ft_strcpy`
+- `ft_strncpy`
+- `ft_strcat`
+- `ft_strncat`
+- `ft_strlcat`
+- `ft_strchr`
+- `ft_strrchr`
+- `ft_strstr`
+- `ft_strnstr`
+- `ft_strcmp`
+- `ft_strncmp`
 
-* `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memccpy`, `ft_memmove`
-* `ft_memchr`, `ft_memcmp`
+#### Character Checks and Conversions
+- `ft_isalpha`
+- `ft_isdigit`
+- `ft_isalnum`
+- `ft_isascii`
+- `ft_isprint`
+- `ft_toupper`
+- `ft_tolower`
 
-#### String Functions:
-
-* `ft_strlen`, `ft_strdup`, `ft_strcpy`, `ft_strncpy`, `ft_strcat`
-* `ft_strncat`, `ft_strlcat`, `ft_strchr`, `ft_strrchr`
-* `ft_strstr`, `ft_strnstr`, `ft_strcmp`, `ft_strncmp`
-
-#### Character Checks & Conversions:
-
-* `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint`
-* `ft_toupper`, `ft_tolower`
-
-#### Miscellaneous:
-
-* `ft_atoi`
-
----
+#### Miscellaneous
+- `ft_atoi`
 
 ### Additional Utility Functions
 
-* Memory Management: `ft_memalloc`, `ft_memdel`
-* String Allocation & Modification:
-  `ft_strnew`, `ft_strdel`, `ft_strclr`, `ft_striter`, `ft_striteri`
-  `ft_strmap`, `ft_strmapi`, `ft_strequ`, `ft_strnequ`
-  `ft_strsub`, `ft_strjoin`, `ft_strtrim`, `ft_strsplit`
-* Numeric Conversion: `ft_itoa`
-* Output Functions: `ft_putchar`, `ft_putstr`, `ft_putendl`, `ft_putnbr` (with `_fd` variants for file descriptors)
+#### Memory Allocation and Deallocation
+- `ft_memalloc`
+- `ft_memdel`
 
----
+#### String Manipulation
+- `ft_strnew`
+- `ft_strdel`
+- `ft_strclr`
+- `ft_striter`
+- `ft_striteri`
+- `ft_strmap`
+- `ft_strmapi`
+- `ft_strequ`
+- `ft_strnequ`
+- `ft_strsub`
+- `ft_strjoin`
+- `ft_strtrim`
+- `ft_strsplit`
 
-### Bonus: Linked List Utilities
+#### Numeric Conversion
+- `ft_itoa`
 
-Custom linked list structure:
+#### Output Functions
+- `ft_putchar`
+- `ft_putstr`
+- `ft_putendl`
+- `ft_putnbr`
+- `ft_putchar_fd`
+- `ft_putstr_fd`
+- `ft_putendl_fd`
+- `ft_putnbr_fd`
+
+### Bonus: Linked List Functions
+
+Includes utilities to manipulate singly linked lists using the following structure:
 
 ```c
 typedef struct s_list
@@ -67,51 +96,43 @@ typedef struct s_list
 } t_list;
 ```
 
-Linked list manipulation functions:
+#### Linked List Operations
+- `ft_lstnew`
+- `ft_lstdelone`
+- `ft_lstdel`
+- `ft_lstadd`
+- `ft_lstiter`
+- `ft_lstmap`
 
-* `ft_lstnew`, `ft_lstdelone`, `ft_lstdel`, `ft_lstadd`, `ft_lstiter`, `ft_lstmap`
+## Compilation and Usage
 
----
-
-## Installation & Usage
-
-Clone the repository:
+Clone the repository and build the library using `make`:
 
 ```bash
 git clone https://github.com/kosyan62/libft.git
 cd libft
-```
-
-Build the static library:
-
-```bash
 make
 ```
 
-This will generate the `libft.a` library.
+This will produce the `libft.a` static library.
 
-### Available Makefile Targets:
+### Makefile Targets
 
-| Target   | Description                     |
-| -------- | ------------------------------- |
-| `all`    | Compile the library             |
-| `clean`  | Remove object files             |
-| `fclean` | Remove object files and library |
-| `re`     | Recompile from scratch          |
+| Target   | Description                      |
+|----------|----------------------------------|
+| `all`    | Compile the library               |
+| `clean`  | Remove object files               |
+| `fclean` | Remove object files and library   |
+| `re`     | Rebuild the library from scratch  |
 
----
+## Project Guidelines
 
-## Coding Standards
-
-This project adheres to the **42 Norm**:
-
-* No forbidden functions (only `malloc`, `free`, and `write` allowed).
-* Strict memory management (no leaks or undefined behavior).
-* Static functions for internal helpers.
-* Modular and well-structured code.
-
----
+- Compliant with the 42 School Norm (strict coding standards).
+- No use of global variables.
+- Allowed standard functions: `malloc`, `free`, and `write`.
+- Static helper functions are used where applicable.
+- Proper memory management and error handling.
 
 ## License
 
-This project is developed as part of the 42 School curriculum and is intended for educational purposes.
+This project is developed as part of the 42 School curriculum and is intended for educational purposes only.

@@ -2,41 +2,31 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [master]
   pull_request:
-    branches: [ "master" ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-    - name: make
-      run: make
+    - run: make libft
 
   test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-    - name: make
-      run: make
-
-    - name: install dependencies
-      run: sudo apt-get install -y gcc libbsd-dev libncurses-dev
-
-    - name: clone test repo
-      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i "s|^\(LIBFTDIR[ \t]*=[ \t]*\)\.\./libft|\1$(pwd)|" /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
-
-    - name: run tests
-      run: cd /tmp/libft-unit-test && make && ./run_test
-
-    - name: upload test results
-      if: always()
+    - name: Install Dependencies
+      run: sudo apt-get install -y libbsd-dev libncurses-dev
+    - name: Install and build libft-unit-test
+      run: | 
+        git clone https://github.com/alelievr/libft-unit-test.git libft-unit-test && \
+        make libft-unit-test
+    - name: Run Tests
+      run: libft-unit-test/run_test
+    - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
-          name: results
-          path: /tmp/libft-unit-test/result.log
+        name: results
+        path: libft-unit-test/result.log
