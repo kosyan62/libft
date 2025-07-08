@@ -15,3 +15,18 @@ jobs:
     - uses: actions/checkout@v4
     - name: make
       run: make
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: make
+      run: make
+
+    - name: clone test repo
+      run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i 's|^\(LIBFTDIR[ \t]*=[ \t]*\)\${PWD}' /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
+
+    - name: run tests
+      run: make && ./run_test
