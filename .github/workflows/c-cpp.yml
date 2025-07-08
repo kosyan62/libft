@@ -29,4 +29,4 @@ jobs:
       run: git clone https://github.com/alelievr/libft-unit-test.git /tmp/libft-unit-test && sed -i 's|^\(LIBFTDIR[ \t]*=[ \t]*\)\.\./libft|${PWD}|' /tmp/libft-unit-test/Makefile && cd /tmp/libft-unit-test
 
     - name: run tests
-      run: cd /tmp/libft-unit-test && make && ./test.sh
+      run: cd /tmp/libft-unit-test && make && ./run_test
