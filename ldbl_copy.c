@@ -17,11 +17,11 @@ char	*nan_str(long double n)
 	char *res;
 
 	res = ft_strnew(5);
-	if (n != n)
+	if (isnan(n))
 		return (ft_strcpy(res, "nan"));
-	else if (n == 1. / 0)
+	else if (isinf(n) && n > 0)
 		return (ft_strcpy(res, "inf"));
-	else if (n == -1. / 0)
+	else if (isinf(n) && n < 0)
 		return (ft_strcpy(res, "-inf"));
 	else
 		return (NULL);
@@ -85,7 +85,7 @@ char	*print_float(long double n, long long afterdot)
 	i[0] = 0;
 	ld.ldbl = n;
 	bit_shift = 63;
-	if (n != n || n == 1. / 0 || n == -1. / 0)
+	if (isnan(n) || isinf(n))
 		return (nan_str(n));
 	ft_bzero(x[0], BUFSIZE);
 	ft_bzero(x[1], BUFSIZE);
