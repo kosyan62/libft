@@ -10,9 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft
-TARGET_STATIC = $(NAME).a
-TARGET_SHARED = $(NAME).so
+include libft.mk
 
 BUILD_DIR = build
 BUILD_STATIC = $(BUILD_DIR)/static
@@ -20,7 +18,6 @@ BUILD_SHARED = $(BUILD_DIR)/shared
 
 
 SRC_DIR = src
-INC_DIR = includes
 
 SRCS := $(shell find $(SRC_DIR) -name "*.c")
 OBJS_STATIC := $(patsubst $(SRC_DIR)/%.c,$(BUILD_STATIC)/%.o,$(SRCS))
@@ -48,11 +45,11 @@ $(TARGET_SHARED): $(OBJS_SHARED)
 # compile source files
 $(BUILD_STATIC)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD_STATIC)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(LIBFT_INC_DIR) -c $< -o $@
 
 $(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD_SHARED)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -nostartfiles -fPIC -c $< -o $@
+	$(CC) $(CFLAGS) $(LIBFT_INC) -nostartfiles -fPIC -c $< -o $@
 
 # clean, fclean, and rebuild targets
 re: fclean all
