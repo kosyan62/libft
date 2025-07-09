@@ -1,13 +1,13 @@
 # Makefile for linking with the libft library
 
-LIBFT_DIR ?= .
+LIBFT_PATH := $(realpath $(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
 
 TARGET_STATIC = libft.a
 TARGET_SHARED = libft.so
 
 
-LIBFT_INC_DIR = $(LIBFT_DIR)/includes
+LIBFT_INC_DIR = $(LIBFT_PATH)/includes
 
 LIBFT_INC = -I $(LIBFT_INC_DIR)
-LIBFT_LNK = -L $(LIBFT_DIR) -lft
-LIBFT_LIB = $(LIBFT_DIR)/$(TARGET_STATIC)
+LIBFT_LNK = -L $(LIBFT_PATH) -lft
+LIBFT_LIB = $(LIBFT_PATH)/$(TARGET_STATIC)

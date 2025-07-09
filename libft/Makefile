@@ -45,7 +45,7 @@ $(TARGET_SHARED): $(OBJS_SHARED)
 # compile source files
 $(BUILD_STATIC)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD_STATIC)
-	$(CC) $(CFLAGS) -I $(LIBFT_INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(LIBFT_INC) -c $< -o $@
 
 $(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD_SHARED)
