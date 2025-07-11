@@ -32,8 +32,9 @@ all: setup $(TARGET_STATIC) $(TARGET_SHARED)
 
 # create build directories if they do not exist
 setup:
-	@mkdir -p $(BUILD_STATIC)
-	@mkdir -p $(BUILD_SHARED)
+	@mkdir -p $(sort $(dir $(OBJS_STATIC)))
+	@mkdir -p $(sort $(dir $(OBJS_SHARED)))
+
 
 # build static and shared libraries
 $(TARGET_STATIC): $(OBJS_STATIC)
@@ -44,21 +45,19 @@ $(TARGET_SHARED): $(OBJS_SHARED)
 
 # compile source files
 $(BUILD_STATIC)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(BUILD_STATIC)
 	$(CC) $(CFLAGS) $(LIBFT_INC) -c $< -o $@
 
 $(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(BUILD_SHARED)
 	$(CC) $(CFLAGS) $(LIBFT_INC) -nostartfiles -fPIC -c $< -o $@
 
 # clean, fclean, and rebuild targets
 re: fclean all
 
-so: $(TARGET_SHARED)
+so: $(TARGET_SHARED) # for testing purposes
 
 clean:
-	rm -rvf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -rvf $(TARGET_STATIC) $(TARGET_SHARED)
+	rm -rf $(TARGET_STATIC) $(TARGET_SHARED)
 
