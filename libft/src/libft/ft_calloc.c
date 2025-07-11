@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_abortalloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgena <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 23:12:40 by mgena             #+#    #+#             */
-/*   Updated: 2019/09/20 12:00:55 by mgena            ###   ########.fr       */
+/*   Created: 2019/09/18 13:59:25 by mgena             #+#    #+#             */
+/*   Updated: 2019/09/18 14:01:37 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t srclen;
-	size_t k;
-	size_t dstlen;
+	void	*dest;
 
-	if (size == 0)
-		return (ft_strlen(src));
-	dstlen = ft_strlen(dst);
-	srclen = ft_strlen(src);
-	if (dstlen > size)
-		return (size + srclen);
-	k = 0;
-	while (k + dstlen < size - 1 && src[k] != '\0')
-	{
-		dst[k + dstlen] = src[k];
-		k++;
-	}
-	dst[k + dstlen] = 0;
-	return (srclen + dstlen);
+	if (!count || !size)
+		return (dest = malloc(count * size));
+	if (!(dest = (void*)malloc(size * count)))
+		return (NULL);
+	ft_bzero(dest, count * size);
+	return (dest);
 }
