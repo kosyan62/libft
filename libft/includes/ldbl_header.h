@@ -6,14 +6,13 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 19:52:10 by mgena             #+#    #+#             */
-/*   Updated: 2020/02/04 17:59:14 by mgena            ###   ########.fr       */
+/*   Updated: 2019/12/22 21:14:52 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LDBL_HEADER_H
 # define LDBL_HEADER_H
 # include "libftprintf.h"
-# include <math.h>
 # define BUFSIZE 16384
 
 typedef union	u_long_double

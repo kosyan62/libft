@@ -6,25 +6,18 @@
 /*   By: pkingsbl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:31:53 by pkingsbl          #+#    #+#             */
-/*   Updated: 2020/07/22 14:57:41 by mgena            ###   ########.fr       */
+/*   Updated: 2020/01/13 17:45:51 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
+# include <stdarg.h>
 # include "libft.h"
 
+# define DIMASIK (char[5][3]) {"l\0\0", "hh\0", "h\0\0", "ll\0", "L\0\0"}
 # define NONDEC spec.type == 'x' || spec.type == 'X' || spec. type == 'o'
-# define RED   "\x1B[31m"
-# define GRN   "\x1B[32m"
-# define YEL   "\x1B[33m"
-# define BLU   "\x1B[34m"
-# define MAG   "\x1B[35m"
-# define CYN   "\x1B[36m"
-# define WHT   "\x1B[37m"
-# define BWN   "\x1B[37m"
-# define RESET "\x1B[0m"
 
 typedef union	u_ptr
 {
@@ -51,6 +44,7 @@ typedef struct	s_specif
 	char		type;
 }				t_specif;
 
+int				ft_printf(const char *format, ...);
 void			type(char *point);
 void			ft_spec_new(t_specif *spec);
 char			*ft_for_string(va_list ap, t_specif spec);
@@ -73,11 +67,7 @@ const char		*search_wide(const char *str, t_specif *spec, va_list ap);
 const char		*search_precision(const char *str, t_specif *spec, va_list ap);
 const char		*search_size(const char *str, t_specif *spec);
 const char		*search_type(const char *str, t_specif *spec);
-const char		*ft_search_spec(const char *format, t_specif *spec, va_list ap);
-int				ft_solve_type(va_list ap, int fd, t_specif spec);
 void			str_wide(char **str, t_specif spec);
 void			str_flags(char **str, char *s1);
-void			set_colour(const char *str, int fd);
-int				print_not_percent(const char *str, int *i, int fd);
 
 #endif
