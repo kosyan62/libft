@@ -11,18 +11,27 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
+
+char *handle_null_string(t_specif spec)
+{
+	char *tmp;
+
+	tmp = ft_strdup("(null)");
+	if (spec.precision > -1 && spec.precision < (int)ft_strlen(tmp))
+		tmp[0] = '\0';
+	return tmp;
+}
 
 char	*ft_for_string(va_list ap, t_specif spec)
 {
 	char	*tmp;
 
-	tmp = ft_strdup(va_arg(ap, char*));
+	tmp = va_arg(ap, char*);
 	if (tmp == NULL)
-	{
-		free(tmp);
-		tmp = ft_strdup("(null)");
-		spec.len = 6;
-	}
+		return handle_null_string(spec);
+	else
+		tmp = ft_strdup(tmp);
 	if (spec.precision > -1 && spec.precision < (int)ft_strlen(tmp))
 		tmp[spec.precision] = '\0';
 	if (spec.wide != 0 && (spec.wide > (int)ft_strlen(tmp)))

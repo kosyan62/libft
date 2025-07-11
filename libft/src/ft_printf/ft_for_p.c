@@ -18,6 +18,10 @@ char	*pointer(void *ptr)
 	char			*addr;
 	t_memory_ptr	x;
 
+	if (ptr == NULL)
+	{
+		return (ft_strdup("(nil)"));
+	}
 	res = ft_strnew(11);
 	if (res == NULL)
 		return (NULL);
