@@ -44,7 +44,6 @@ typedef struct	s_specif
 	char		type;
 }				t_specif;
 
-int				ft_printf(const char *format, ...);
 void			type(char *point);
 void			ft_spec_new(t_specif *spec);
 char			*ft_for_string(va_list ap, t_specif spec);

@@ -88,5 +88,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 void				*ft_calloc(size_t count, size_t size);
+int					ft_printf(const char *format, ...);
 
 #endif
