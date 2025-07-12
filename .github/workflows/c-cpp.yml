@@ -55,7 +55,7 @@ jobs:
         key: libft-${{ hashFiles('libft/**/*') }}
     - run: cp libft/libft.a libftprintf.a
     - name: Install and build ft_printf_tester
-      run:
+      run: |
         git clone https://github.com/paulo-santana/ft_printf_tester.git && \
         sed -i '/^_bonus:/ {n; d;}' ft_printf_tester/Makefile && \
         sed -i '/^${LIBFTPRINTF}:/ {n; d;}' ft_printf_tester/Makefile
