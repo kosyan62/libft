@@ -36,7 +36,7 @@ jobs:
     needs: [build, test_libft]
     steps:
     - uses: actions/checkout@v4
-    - run: cp libft/libft.a libftprintf.a
+    - run: make -C libft && cp libft/libft.a libftprintf.a
     - name: Install and build ft_printf_tester
       run:
         git clone https://github.com/paulo-santana/ft_printf_tester.git && \
