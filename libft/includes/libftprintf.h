@@ -18,6 +18,14 @@
 
 # define DIMASIK (char[5][3]) {"l\0\0", "hh\0", "h\0\0", "ll\0", "L\0\0"}
 # define NONDEC spec.type == 'x' || spec.type == 'X' || spec. type == 'o'
+# define RED   "\x1B[31m"
+# define GRN   "\x1B[32m"
+# define YEL   "\x1B[33m"
+# define BLU   "\x1B[34m"
+# define MAG   "\x1B[35m"
+# define CYN   "\x1B[36m"
+# define WHT   "\x1B[37m"
+# define RESET "\x1B[0m"
 
 typedef union	u_ptr
 {
@@ -47,7 +55,7 @@ typedef struct	s_specif
 void			type(char *point);
 void			ft_spec_new(t_specif *spec);
 char			*ft_for_string(va_list ap, t_specif spec);
-int				ft_for_char(va_list ap, t_specif *spec);
+char			*ft_for_char(va_list ap, t_specif *spec);
 char			*ft_type_to_str(va_list ap, t_specif spec);
 char			*ft_for_decimal(__int128_t dec, t_specif spec, int base);
 char			*ft_for_unsigned(long long dec, t_specif spec);
@@ -60,6 +68,7 @@ char			*ft_strright(char **str, int wide, char c);
 char			*ft_itoa_base(__int128_t n, int base);
 char			*ft_for_p(va_list ap, t_specif spec);
 char			*ft_for_ld(va_list ap, t_specif spec);
+char			*print_not_percent(int fd, char *str, int *i);
 char			*print_float(long double n, long long afterdot);
 const char		*search_flags(const char *str, t_specif *spec);
 const char		*search_wide(const char *str, t_specif *spec, va_list ap);

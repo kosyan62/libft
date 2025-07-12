@@ -40,14 +40,14 @@ char		*ft_type_to_str(va_list ap, t_specif spec)
 	return (res);
 }
 
-int			ft_solve_type(va_list ap, t_specif spec)
+int			ft_solve_type(int fd, va_list ap, t_specif spec)
 {
 	char	*str;
 	int		i;
 
 	str = NULL;
 	if (spec.type == 'c')
-		return (ft_for_char(ap, &spec));
+		str = ft_for_char(ap, &spec);
 	else if (spec.type == 's')
 		str = ft_for_string(ap, spec);
 	else if (spec.type == 'u' || spec.type == 'x' ||
@@ -60,7 +60,7 @@ int			ft_solve_type(va_list ap, t_specif spec)
 		str = ft_for_percent(spec);
 	else if (spec.type == 'f')
 		str = ft_for_ld(ap, spec);
-	ft_putstr(str);
+	ft_putstr_fd(str, fd);
 	i = ft_strlen(str);
 	ft_strdel(&str);
 	return (i);
@@ -118,16 +118,13 @@ int			ft_fdprintf(int fd, const char *format, ...)
 	while (*format != '\0')
 	{
 		if (*format != '%')
-		{
-			write(fd, format++, 1);
-			i++;
-		}
-		if (*format == '%')
+			format = print_not_percent(fd, (char *)format, &i);
+		else if (*format == '%')
 		{
 			format++;
 			if ((format = ft_search_spec(format, &spec, ap)) == NULL)
 				return (0);
-			i += ft_solve_type(ap, spec);
+			i += ft_solve_type(fd, ap, spec);
 		}
 	}
 	va_end(ap);
