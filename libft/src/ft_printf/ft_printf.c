@@ -105,7 +105,7 @@ void		ft_spec_new(t_specif *spec)
 	spec->res = NULL;
 }
 
-int			ft_printf(const char *format, ...)
+int			ft_fdprintf(int fd, const char *format, ...)
 {
 	int			i;
 	va_list		ap;
@@ -132,4 +132,9 @@ int			ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (i);
+}
+
+int ft_printf(const char *format, ...)
+{
+	return ft_fdprintf(1, format);
 }
