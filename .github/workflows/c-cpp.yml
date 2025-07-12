@@ -60,10 +60,16 @@ jobs:
         sed -i '/^_bonus:/ {n; d;}' ft_printf_tester/Makefile && \
         sed -i '/^${LIBFTPRINTF}:/ {n; d;}' ft_printf_tester/Makefile
     - name: Run Tests
-      run: | 
-        cmd="cd ft_printf_tester && sh test > result.log && cat result.log" && \
-        for i in {1..10}; do $cmd; if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then break; fi; sleep 1; done
-    - run: if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then echo "Some tests failed" && exit 1; else exit 0; fi
+      run: |
+        pushd ft_printf_tester
+        for i in {1..10}; do
+          echo "Running test iteration $i"
+          sh test > result.log && cat result.log
+          if tail -n 1 ft_printf_tester/result.log | grep -q "Tests OK"; then break; fi
+          sleep 1
+        done
+        popd
+  - run: if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then echo "Some tests failed" && exit 1; else exit 0; fi
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
