@@ -64,7 +64,7 @@ jobs:
           pushd ft_printf_tester
           for i in {1..10}; do
             echo "Running test iteration $i"
-            sh test 1 > result.log 2 > /dev/null && cat result.log
+            sh test 1> result.log 2> /dev/null && cat result.log
             if tail -n 1 result.log | grep -q "Tests OK"; then break; fi
             sleep 1
           done
