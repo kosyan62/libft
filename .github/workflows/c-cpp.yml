@@ -21,7 +21,7 @@ jobs:
 
       - name: Build libft
         if: steps.cache-libft.outputs.cache-hit != 'true'
-        run: make -C libft
+        run: make -C libft && make -C libft so && make -C libft clean
 
   test_libft:
     runs-on: ubuntu-latest
