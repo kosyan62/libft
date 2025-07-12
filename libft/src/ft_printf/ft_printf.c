@@ -119,7 +119,7 @@ int			ft_fdprintf(int fd, const char *format, ...)
 	{
 		if (*format != '%')
 		{
-			write(1, format++, 1);
+			write(fd, format++, 1);
 			i++;
 		}
 		if (*format == '%')

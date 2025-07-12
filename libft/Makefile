@@ -28,36 +28,33 @@ OBJS_SHARED := $(patsubst $(SRC_DIR)/%.c,$(BUILD_SHARED)/%.o,$(SRCS))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-all: setup $(TARGET_STATIC) $(TARGET_SHARED)
-
-# create build directories if they do not exist
-setup:
-	@mkdir -p $(sort $(dir $(OBJS_STATIC)))
-	@mkdir -p $(sort $(dir $(OBJS_SHARED)))
-
+all: $(LIBFT_TARGET)
 
 # build static and shared libraries
-$(TARGET_STATIC): $(OBJS_STATIC)
-	ar rcs $(TARGET_STATIC) $(OBJS_STATIC)
+$(LIBFT_TARGET): $(OBJS_STATIC)
+	ar rcs $(LIBFT_TARGET) $(OBJS_STATIC)
 
-$(TARGET_SHARED): $(OBJS_SHARED)
-	$(CC) -shared -o $(TARGET_SHARED) $(OBJS_SHARED)
+$(LIBFT_SHARED_TARGET): $(OBJS_SHARED)
+	$(CC) -shared -o $(LIBFT_SHARED_TARGET) $(OBJS_SHARED)
+
+# for testing purposes
+so: $(LIBFT_SHARED_TARGET)
 
 # compile source files
 $(BUILD_STATIC)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(sort $(dir $(OBJS_STATIC)))
 	$(CC) $(CFLAGS) $(LIBFT_INC) -c $< -o $@
 
 $(BUILD_SHARED)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(sort $(dir $(OBJS_SHARED)))
 	$(CC) $(CFLAGS) $(LIBFT_INC) -nostartfiles -fPIC -c $< -o $@
 
 # clean, fclean, and rebuild targets
 re: fclean all
 
-so: $(TARGET_SHARED) # for testing purposes
-
 clean:
 	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -rf $(TARGET_STATIC) $(TARGET_SHARED)
+	rm -rf $(LIBFT_TARGET) $(patsubst %.a,%.so,$(LIBFT_TARGET))
 
