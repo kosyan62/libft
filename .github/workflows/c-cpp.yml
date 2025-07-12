@@ -11,13 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: make -C libft
+    - name: Cache libft.a
+      id: cache-libft
+      uses: actions/cache@v4
+      with:
+        path: libft/libft.a libft/libft.so
+        key: libft-${{ hashFiles('libft/**/*') }}
+
+    - name: build libft
+      if: steps.cache-libft.outputs.cache-hit != 'true'
+      run: make -C libft
 
   test_libft:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/cache@v4
+      with:
+        path: libft/libft.a libft/libft.so
+        key: libft-${{ hashFiles('libft/**/*') }}
     - name: Install Dependencies
       run: sudo apt-get install -y libbsd-dev libncurses-dev
     - name: Install and build libft-unit-test
@@ -36,6 +49,10 @@ jobs:
     needs: [build, test_libft]
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/cache@v4
+      with:
+        path: libft/libft.a
+        key: libft-${{ hashFiles('libft/**/*') }}
     - run: make -C libft && cp libft/libft.a libftprintf.a
     - name: Install and build ft_printf_tester
       run:
