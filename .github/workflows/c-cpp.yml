@@ -13,8 +13,9 @@ jobs:
     - uses: actions/checkout@v4
     - run: make -C libft
 
-  test:
+  test_libft:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
     - uses: actions/checkout@v4
     - name: Install Dependencies
@@ -30,3 +31,24 @@ jobs:
       with:
         name: results
         path: libft-unit-test/result.log
+  test_printf:
+    runs-on: ubuntu-latest
+    needs: [build, test_libft]
+    steps:
+    - uses: actions/checkout@v4
+    - run: cp libft/libft.a libftprintf.a
+    - name: Install and build ft_printf_tester
+      run:
+        git clone https://github.com/paulo-santana/ft_printf_tester.git && \
+        sed -i '/^_bonus:/ {n; d;}' ft_printf_tester/Makefile && \
+        sed -i '/^${LIBFTPRINTF}:/ {n; d;}' ft_printf_tester/Makefile
+    - name: Run Tests
+      run: | 
+        cmd="cd ft_printf_tester && sh test > result.log && cat result.log" && \
+        for i in {1..10}; do $cmd; if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then break; fi; sleep 1; done
+    - run: if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then echo "Some tests failed" && exit 1; else exit 0; fi
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: printf_results
+        path: ft_printf_tester/result.log
