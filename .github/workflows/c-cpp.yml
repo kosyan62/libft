@@ -63,8 +63,25 @@ jobs:
       run: |
           for i in {1..10}; do
             echo "Running test iteration $i"
-            $(cd ft_printf_tester && sh test 1> result.log 2> /dev/null && cat result.log)
-            if tail -n 1 ft_printf_tester/result.log | grep -q "Tests OK"; then exit 0; fi
+            $(cd ft_printf_tester && sh test 1> result.log 2> /dev/null || true)
+            if [ -f ft_printf_tester/result.log ]; then
+              echo "Test iteration $i completed"
+              if 
+                tail -n 1 ft_printf_tester/result.log | grep -q "Tests OK"; 
+                then
+                  echo "Test iteration $i passed"
+                  echo "Result log:"
+                  cat ft_printf_tester/result.log
+                  exit 0
+                else
+                  echo "Test iteration $i failed"
+                  echo "Result log:"
+                  cat ft_printf_tester/result.log
+                  sleep 1
+              fi
+            else
+                echo "Test iteration $i failed to create result.log"
+            fi
           done
           exit 1
     - name: Check result
