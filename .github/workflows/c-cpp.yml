@@ -70,7 +70,7 @@ jobs:
           done
           popd
     - name: Check result
-    - run: if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then echo "Some tests failed" && exit 1; else exit 0; fi
+      run: if tail -n 1 ft_printf_tester/result.log | grep -q "100%"; then echo "Some tests failed" && exit 1; else exit 0; fi
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
