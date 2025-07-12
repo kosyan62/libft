@@ -29,7 +29,7 @@ char	*ft_for_string(va_list ap, t_specif spec)
 
 	tmp = va_arg(ap, char*);
 	if (tmp == NULL)
-		return handle_null_string(spec);
+		tmp = handle_null_string(spec);
 	else
 		tmp = ft_strdup(tmp);
 	if (spec.precision > -1 && spec.precision < (int)ft_strlen(tmp))

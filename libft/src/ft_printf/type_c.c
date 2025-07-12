@@ -12,10 +12,9 @@
 
 #include "libftprintf.h"
 
-char	*ft_for_char(va_list ap, t_specif *spec)
+int		ft_for_char(int fd, va_list ap, t_specif *spec)
 {
 	char	c;
-	char	*res;
 	int		i;
 
 	i = 1;
@@ -24,32 +23,18 @@ char	*ft_for_char(va_list ap, t_specif *spec)
 	{
 		if (spec->minus == 1)
 		{
-			res = ft_strnew(spec->wide + 2);
-			res[0] = c;
-			while (i < spec->wide)
-			{
-				res[i] = ' ';
-				i++;
-			}
-			res[i] = '\0';
+			write(fd, &c, 1);
+			while (i++ != spec->wide)
+				write(fd, " ", 1);
 		}
 		else if (spec->minus == 0)
 		{
-			res = ft_strnew(spec->wide + 2);
-			while (i < spec->wide)
-			{
-				res[i] = ' ';
-				i++;
-			}
-			res[0] = c;
-			res[i] = '\0';
+			while (i++ != spec->wide)
+				write(fd, " ", 1);
+			write(fd, &c, 1);
 		}
-		else
-			return (NULL);
-		return (res);
+		return (i - 1);
 	}
-	res = ft_strnew(2);
-	res[0] = c;
-	res[1] = '\0';
-	return (res);
+	write(fd, &c, 1);
+	return (1);
 }

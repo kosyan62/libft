@@ -55,7 +55,7 @@ typedef struct	s_specif
 void			type(char *point);
 void			ft_spec_new(t_specif *spec);
 char			*ft_for_string(va_list ap, t_specif spec);
-char			*ft_for_char(va_list ap, t_specif *spec);
+int				ft_for_char(int fd, va_list ap, t_specif *spec);
 char			*ft_type_to_str(va_list ap, t_specif spec);
 char			*ft_for_decimal(__int128_t dec, t_specif spec, int base);
 char			*ft_for_unsigned(long long dec, t_specif spec);

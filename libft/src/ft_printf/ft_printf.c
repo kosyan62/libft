@@ -47,7 +47,7 @@ int			ft_solve_type(int fd, va_list ap, t_specif spec)
 
 	str = NULL;
 	if (spec.type == 'c')
-		str = ft_for_char(ap, &spec);
+		return ft_for_char(fd, ap, &spec);
 	else if (spec.type == 's')
 		str = ft_for_string(ap, spec);
 	else if (spec.type == 'u' || spec.type == 'x' ||
@@ -105,16 +105,12 @@ void		ft_spec_new(t_specif *spec)
 	spec->res = NULL;
 }
 
-int			ft_fdprintf(int fd, const char *format, ...)
+int			generic_printf(int fd, const char *format, va_list ap)
 {
 	int			i;
-	va_list		ap;
 	t_specif	spec;
 
 	i = 0;
-	if (!format)
-		return (0);
-	va_start(ap, format);
 	while (*format != '\0')
 	{
 		if (*format != '%')
@@ -127,11 +123,27 @@ int			ft_fdprintf(int fd, const char *format, ...)
 			i += ft_solve_type(fd, ap, spec);
 		}
 	}
+	return (i);
+}
+
+int			ft_fdprintf(int fd, const char *format, ...)
+{
+	int i;
+	va_list		ap;
+
+	va_start(ap, format);
+	i = generic_printf(fd, format, ap);
 	va_end(ap);
 	return (i);
 }
 
-int ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
-	return ft_fdprintf(1, format);
+	int i;
+	va_list		ap;
+
+	va_start(ap, format);
+	i = generic_printf(1, format, ap);
+	va_end(ap);
+	return (i);
 }
